@@ -1,0 +1,53 @@
+body { background-color:#fff; }
+#master {
+  width:960px;
+  margin-left:auto;
+  margin-right:auto;
+}
+#contentarea {
+  width:720px;
+  float:left;
+}
+aside {
+  float:right;
+  width:230px;
+}
+body header h1 { margin:0px; }
+nav ul {
+  display:box;
+  width:960px;
+  list-style:none;
+  padding-left:0px;
+  margin:0px;
+}
+nav ul li {
+  float:left;
+  margin:5px;
+}
+#messages_list {
+  list-style:none;
+  padding:0px;
+}
+.msg {
+  border:1px solid;
+  margin:5px;
+  padding:3px;
+}
+.msg_error {
+  border-color:#f0;
+  background-color:#ff9b9b;
+}
+.msg_message {
+  border-color:#596fff;
+  background-color:#c3daff;
+}
+.msg_warning {
+  border-color:#d5d50;
+  background-color:#ffffae;
+}
+.msg_success {
+  border-color:#0800;
+  background-color:#84ff84;
+}
+body footer { margin-top:10px; }
+.cleaner { clear:both; }
