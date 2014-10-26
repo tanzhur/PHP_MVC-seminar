@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!------------------------------------------------------------------------------
+ ! Copyright (c) 2000, 2007 IBM Corporation and others.
+ ! All rights reserved. This program and the accompanying materials 
+ ! are made available under the terms of the Eclipse Public License v1.0
+ ! which accompanies this distribution, and is available at
+ ! http://www.eclipse.org/legal/epl-v10.html
+ ! 
+ ! Contributors:
+ !     IBM Corporation - initial API and implementation
+ ------------------------------------------------------------------------------->
+<!--
+	Search group
+ -->
+<!--
+	Search group ends
+ -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+
+<title>Search Results</title>
+
+<style type="text/css">
+/*******************************************************************************
+ * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials 
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *******************************************************************************/
+
+body {
+    
+	color: WindowText;
+	font: icon;
+	padding: 0px;
+	border: 0px;
+	margin-top: 5px;
+	margin-bottom: 8px;
+	margin-left: 5px;
+	margin-right: 5px;
+	cursor: default;
+}
+
+table {
+	font: icon;
+	width: 100%;
+	table-layout: fixed;
+}
+
+a {
+	text-decoration:none; 
+	padding:0px;
+}
+
+a:hover {
+	text-decoration:underline; 
+}
+
+.category {
+	font-weight: bold;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.sectiontitle {
+	background-color: ButtonFace;
+	font-weight:bold;
+	margin-top:7px;
+}
+
+.active { 
+	background:Highlight;
+	color:HighlightText;
+	width:100%;
+	height:100%;
+}
+
+#menu {
+	position:absolute;
+	display:none;
+	background:ButtonFace;
+	border:2px outset;
+	padding:2px 0px;
+}
+
+.selectedMenuItem {
+	background:Highlight;
+	color:HighlightText;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.unselectedMenuItem {
+	background:ButtonFace;
+	color:WindowText;
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.icon {
+	width: 23px;
+	padding-left: 0px;
+}
+
+.description {
+	display: block;
+}
+
+</style>
+
+
+
+
+<!-- base href="http://pic.dhe.ibm.com/infocenter/wsmashin/v1r1m1/advanced/searchView.jsp?view=search&topic=/zero.infocenter.singlebook.doc/using/zero.php/CoreFunctions.html&topic=/zero.infocenter.singlebook.doc/using/zero.php/CoreFunctions.html" -->
+<script language="JavaScript" src="search_data/utils.js"></script>
+<script language="JavaScript" src="searchView_data/list.js"></script>
+<script language="JavaScript">	
+
+var cookiesRequired = "This\u0020feature\u0020requires\u0020cookies\u0020to\u0020be\u0020enabled\u0020in\u0020your\u0020browser\u002E";
+
+function refresh() { 
+	window.location.replace("searchView.jsp?view\u003Dsearch\u0026topic\u003D\u002Fzero\u002Einfocenter\u002Esinglebook\u002Edoc\u002Fusing\u002Fzero\u002Ephp\u002FCoreFunctions\u002Ehtml\u0026topic\u003D\u002Fzero\u002Einfocenter\u002Esinglebook\u002Edoc\u002Fusing\u002Fzero\u002Ephp\u002FCoreFunctions\u002Ehtml");
+}
+
+function isShowCategories() {
+	var value = getCookie("showCategories");
+	return value ? value == "true" : false;
+}
+
+function isShowDescriptions() {
+	var value = getCookie("showDescriptions");
+	return value ? value == "true" : true;
+}
+
+function setShowCategories(value) {
+	setCookie("showCategories", value);
+	setCookie("groupBy", "None");
+	var newValue = isShowCategories();   	    
+	parent.searchToolbarFrame.setButtonState("show_categories", newValue);
+	if (value != newValue) {
+	    alert(cookiesRequired);
+	} else { 	    
+	var query = "view\u003Dsearch\u0026topic\u003D\u002Fzero\u002Einfocenter\u002Esinglebook\u002Edoc\u002Fusing\u002Fzero\u002Ephp\u002FCoreFunctions\u002Ehtml\u0026topic\u003D\u002Fzero\u002Einfocenter\u002Esinglebook\u002Edoc\u002Fusing\u002Fzero\u002Ephp\u002FCoreFunctions\u002Ehtml"; 
+	var index = query.indexOf("group"); 
+	var url;
+	if(index==-1){
+		url = "searchView.jsp?" + query + "&group=None";
+	}else {
+		url = "searchView.jsp?" + query.substr(0, index - 1) + "&group=None"; 
+	}   
+		window.location.replace(url);
+	  //  window.location.reload();
+	}
+}
+
+function setShowDescriptions(value) {
+	setCookie("showDescriptions", value);
+	var newValue = isShowDescriptions();   	
+	parent.searchToolbarFrame.setButtonState("show_descriptions", newValue);
+	if (value != newValue) {
+	    alert(cookiesRequired);
+	} else { 
+	    setCSSRule(".description", "display", value ? "block" : "none");
+	    window.location.reload();
+	}
+}
+
+function toggleShowCategories() {
+	setShowCategories(!isShowCategories());
+}
+
+function toggleShowDescriptions() {
+	setShowDescriptions(!isShowDescriptions());
+}
+
+//group search
+function showWindowStatus(arg) {
+  	try {
+		var statusText = "";
+		if (isIE)
+			statusText = arg.innerText;
+		else if (isMozilla)
+			statusText = arg.lastChild.nodeValue;
+		if (statusText != arg.title) {
+			statusText += " - " + arg.title;
+		}
+		window.status = statusText;
+	} catch (e) {
+	}
+}
+
+function isSearchRequest() {
+	return false
+} 
+
+function changeGroup(arg)
+{
+	var selectedGroup = arg;
+	var query = "view\u003Dsearch\u0026topic\u003D\u002Fzero\u002Einfocenter\u002Esinglebook\u002Edoc\u002Fusing\u002Fzero\u002Ephp\u002FCoreFunctions\u002Ehtml\u0026topic\u003D\u002Fzero\u002Einfocenter\u002Esinglebook\u002Edoc\u002Fusing\u002Fzero\u002Ephp\u002FCoreFunctions\u002Ehtml"; 
+	
+	var index = query.indexOf("group"); 
+	var url;
+	if(index==-1){
+		url = "searchView.jsp?" + query + "&group=" + selectedGroup;
+	}else {
+		url = "searchView.jsp?" + query.substr(0, index - 1) + "&group=" + selectedGroup; 
+	}   
+	window.location.replace(url);
+}
+ 
+
+function clearWindowStatus() {
+	window.status="";
+}
+
+function isGroupBy() {
+	var value = getCookie("groupBy"); 
+	if(value == null)
+		value="None";
+	return value;
+}
+
+function setGroupBy(arg) {
+	setCookie("groupBy", arg);
+	setCookie("showCategories", false);
+	var newValue = isGroupBy();   
+	var pressed = false;
+	
+	if(newValue != "None")  
+		pressed = true;	    
+	parent.searchToolbarFrame.setButtonState("show_categories", pressed); 
+	if (arg != newValue) {
+	    alert(cookiesRequired);
+	} else {
+		if(isSearchRequest())
+	    	changeGroup(arg);  
+	} 
+}
+
+function toggleGroupBy(arg) { 
+	setGroupBy(arg); 
+}
+//group search ends
+
+/**
+ * Defect 762 - right click for tree expanding in search results view
+ * @author huqiongk
+ */
+function mouseUpHandler(e, node) {
+	var theEvent = window.event||e;
+	if (theEvent.button != 2) {
+		return true;
+	} 
+	cancelEventBubble(theEvent);
+	
+	document.oncontextmenu=function(event) {   	// context menu forbidden
+	    if (document.all) 
+	    	window.event.returnValue = false;
+	    else
+	    	event.preventDefault();
+	};
+			
+	expand(node);
+	return false;
+}
+
+/**
+ * Defect 762 - Alt+o and left/right arrows support  for tree navigating in search results view
+ * @author huqiongk
+ */
+function pKeyDownHandler(e, node) {
+	var theEvent = window.event||e; 
+	var keycode = getKeycode(e);
+	
+	// Always cancel the event bubble for navigation keys
+  	cancelEventBubble(theEvent);
+	
+  	if (keycode == 79 || keycode == 39) {	  	
+		expand(node); 
+		return false; 	
+  	} 
+  	else if (keycode == 66 || keycode == 37) {	  	
+		collapse(node); 
+		return false; 	
+  	} 
+  	
+  	return true;
+} 
+</script>
+
+
+</head>
+
+<body dir="ltr">
+
+To search the documentation, type a query in the Search field. The search results will be shown in this view.
+
+ 
+
+
+</body></html>
