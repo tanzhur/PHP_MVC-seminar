@@ -1,0 +1,67 @@
+L I N K S
+---------
+
+Sublime Text PHP Stuff
+http://wasil.org/sublime-text-3-perfect-php-development-set-up
+
+XAMPP
+https://www.apachefriends.org/download_success.html
+
+PHP Datatypes
+http://www.w3schools.com/php/php_datatypes.asp
+
+PHP Docs
+http://php.net/docs.php
+Note: This is awesome
+
+Design patterns in php
+http://sourcemaking.com/design_patterns/abstract_factory/php/2
+
+Magic methods in php
+http://php.net/manual/en/language.oop5.magic.php
+Note: Explain their purpose and give examples
+
+Callbacks in php
+http://php.net/manual/en/language.types.callable.php
+
+Error reporting
+http://www.w3schools.com/php/func_error_reporting.asp
+Note: Important!!!
+
+Code igniter
+https://ellislab.com/codeigniter
+Note: Browse documentation
+
+Code igniter REST
+https://github.com/chriskacerguis/codeigniter-restserver
+
+DataMapper ORM for CodeIgniter
+http://datamapper.wanwizard.eu/
+
+Get DataMapper
+http://getsparks.org/packages/DataMapper-ORM/versions/HEAD/show
+
+Install DataMapper
+http://datamapper.wanwizard.eu/pages/installation.html
+
+Install Code Igniter with Composer
+http://codesamplez.com/development/composer-with-codeigniter
+
+Cool CodeIgniter plugins and stuff
+http://www.rlmseo.com/blog/codeigniter-library-80-free-addons-tutorials-and-videos/
+
+CodeIgniter language files usage
+https://ellislab.com/codeigniter/user-guide/libraries/language.html
+
+Checkout CodeIgniterPlus
+http://codesamplez.com/project/codeigniter-bundle
+
+Laravel Home
+http://laravel.com/
+Note: Browse documentation
+
+Laravel Install
+http://laravel.com/docs/installation
+
+Configure XAMPP for Laravel(My body is ready)
+http://stackoverflow.com/questions/13921458/how-to-enable-openssl-support-in-xampp
