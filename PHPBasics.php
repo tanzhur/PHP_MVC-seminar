@@ -95,7 +95,7 @@ echo "$drink is $color and $power makes it special.\n";
 
 //cycles
 foreach($collections as $key=>$collection)
-{
+{	
 	echo "$key=>";
 	//alternative- printf, like sprintf, but prints
 	printf("%s",$key);	
@@ -133,7 +133,6 @@ foreach($collections as $key=>$collection)
     	echo $collection;
     }
 }
-
 try
 {
 	//troll
