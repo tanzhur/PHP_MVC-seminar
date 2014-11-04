@@ -91,7 +91,17 @@ list($drink, $color, $power) = $info;
 //NOTICE ECHO HERE, SAY SOMETHING ABOUT sprintf() too.
 echo "$drink is $color and $power makes it special.\n";
 
+//spl stuff
+$splstack = new \SplStack();
+
+$splstack->push(10);
+$splstack->push(56);
+
+var_dump($splstack);
+
 //mention resources...
+
+echo(var_dump(3 ** 2));//outputs 9
 
 //cycles
 foreach($collections as $key=>$collection)
