@@ -1,0 +1,43 @@
+Note: You should never have app.debug set to true for a production application. Never, ever do it.
+
+Configure db and go to routes...
+
+->app/config/app.php
+	-set debug to true...
+	-change url
+	-look throught other configs
+
+->app/config/database.php
+	-choose mysql driver
+	-set db connection
+
+->use utf8_unicode_ci charset
+	
+copy files to root folder and fix buggies;
+
+//add filter class to compile	
+
+//define filters in app/filters.php !!!
+
+->app/start/global.php !!!
+ClassLoader::addDirectories(array(
+
+	...,
+	app_path().'/filters'
+
+));
+
+//USE
+Response::make('Unauthorized', 40x); ON ERRORS
+
+//make migrations!!!
+laravel>php artisan migrate:install
+
+php artisan migrate:make create_ne6to_table
+
+then fill in stuff...
+
+php artisan migrate
+
+//Route::pattern('id', '[0-9]+');
+//used with ->where() 

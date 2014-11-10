@@ -1,0 +1,119 @@
+!write functions with camelCase
+! Show advanced stuff in other laravel tutorial, 
+this is simple stuff
+
+->snippet 1
+---
+$env = $app->detectEnvironment(array(
+
+	//'local' => array('homestead'),
+	'local' => array('*.dev', gethostname()),
+    'production' => array('*.com', '*.net', 'www.somedomain.com')
+));
+
+->snippet 2
+---
+$randomAuthorA=DB::table('authors')->orderByRaw("RAND()")->get();
+$pesho=DB::table('authors')->where('name','=','Pesho')->first();
+
+->snippet 3
+---
+ ->whereBetween('votes', array(1, 100)
+
+->snippet 4
+---
+public $layout="common.layout";
+	
+	public function RenderView($content_view,$data)
+	{
+		//assign some values for the layout view
+		$this->layout->title=(isset($data["title"]))?$data["title"]:"Home";
+		//assign views
+		$this->layout->header=View::make('common.header',$data);
+		$this->layout->content=View::make($content_view,$data);
+		$this->layout->footer=View::make('common.footer',$data);
+	}
+	
+->snippet 5
+---
+->where('id', '[0-9]+');
+
+->snippet 6
+---
+<a href="{{ URL::route('empdelete', array('id' => $employee->id)) }}"><i class="fa fa-pencil "></i></a>
+!!!->add route alias
+
+->snippet 7
+---
+return Redirect::route('all-authors')->with('message', 'Author added!');
+
+->snippet 8
+---
+{{Form::open(array('url'=>'authors/create', 'method'=>'POST'))}}
+	{{Form::label('authorName','Author name')}}	
+	{{Form::text('authorName')}}
+	{{Form::label('authorBio','Author biography')}}	
+	{{Form::textarea('authorBio')}}
+	{{Form::submit('Add author')}}
+{{Form::close()}}
+
+->snippet 9
+---
+@if($errors->has())
+<ul>
+	{{ $errors->first('name','<li>:message</li>') }}
+	{{ $errors->first('bio','<li>:message</li>') }}
+</ul>
+@endif	
+{{Form::open(array('url'=>'authors/create', 'method'=>'POST'))}}
+	{{Form::label('name','Author name')}}	
+	<br/>
+	{{Form::text('name',Input::old('name'))}}
+	<br/>
+	{{Form::label('bio','Author bio')}}	
+	<br/>
+	{{Form::textarea('bio',Input::old('bio'))}}
+	<br/>
+	{{Form::submit('Add author')}}
+{{Form::close()}}
+
+->snippet 10
+---
+$validation=Author::Validate(Input::All());
+
+if($validation->fails())
+{
+	//validation failed
+	return Redirect::route('add-author')->withErrors($validation)->withInput();
+}
+
+//create and save new author
+$author=new Author();
+$author->name=Input::get('name');
+$author->bio=Input::get('bio');
+$author->created_at=date('Y-m-d H:m:s');
+$author->updated_at=date('Y-m-d H:m:s');
+$author->save();
+
+//redirect to authors list
+return Redirect::route('all-authors')->with('message', 'Author added!');
+
+->snippet 11
+---
+//alter and save author
+$authorToEdit->name=Input::get('name');
+$authorToEdit->bio=Input::get('bio');
+$authorToEdit->updated_at=date('Y-m-d H:m:s');
+$authorToEdit->update();
+
+->snippet 12
+---
+public static $accessible=array('name','bio');
+
+->snippet 13
+---
+{{Form::token()}}
+
+->snippet 14
+---
+'before'=>'csrf',
